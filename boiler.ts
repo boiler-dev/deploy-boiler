@@ -35,14 +35,6 @@ export const install: ActionBoiler = async () => {
     source: ["source-map-support"],
   })
 
-  actions.push({
-    action: "merge",
-    path: "package.json",
-    source: {
-      deploy: "./bin/deploy",
-    },
-  })
-
   return actions
 }
 
@@ -81,6 +73,14 @@ export const generate: ActionBoiler = async () => {
     path: "bin/deploy",
     sourcePath: "deploy",
     bin: true,
+  })
+
+  actions.push({
+    action: "merge",
+    path: "package.json",
+    source: {
+      deploy: "./bin/deploy",
+    },
   })
 
   return actions
