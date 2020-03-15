@@ -8,6 +8,10 @@ export class Deploy {
     const root = join(__dirname, "../../")
     const { files } = await ls.run(join(root, "deploy"))
 
+    if (!args.length) {
+      args = files.map(file => relative(root, file))
+    }
+
     for (const file of files) {
       for (const arg of args) {
         const rel = relative(root, file)
