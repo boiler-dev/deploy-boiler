@@ -79,7 +79,9 @@ export const generate: ActionBoiler = async () => {
     action: "merge",
     path: "package.json",
     source: {
-      deploy: "./bin/deploy",
+      scripts: {
+        deploy: "./bin/deploy",
+      },
     },
   })
 
