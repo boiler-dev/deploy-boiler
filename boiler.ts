@@ -35,6 +35,14 @@ export const install: ActionBoiler = async () => {
     source: ["source-map-support"],
   })
 
+  actions.push({
+    action: "merge",
+    path: "package.json",
+    source: {
+      deploy: "./bin/deploy",
+    },
+  })
+
   return actions
 }
 
@@ -54,14 +62,6 @@ export const uninstall: ActionBoiler = async () => {
     action: "npmInstall",
     source: ["source-map-support"],
     uninstall: true,
-  })
-
-  actions.push({
-    action: "merge",
-    path: "package.json",
-    source: {
-      deploy: "./bin/deploy",
-    },
   })
 
   return actions
