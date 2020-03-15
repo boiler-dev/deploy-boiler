@@ -5,18 +5,6 @@ import {
   BoilerPrompt,
 } from "boiler-dev"
 
-export const install: ActionBoiler = async () => {
-  const actions: BoilerAction[] = []
-
-  // actions.push({
-  //   action: "npmInstall",
-  //   dev: true,
-  //   source: ["some-package"],
-  // })
-
-  return actions
-}
-
 export const prompt: PromptBoiler = async () => {
   const prompts: BoilerPrompt[] = []
 
@@ -30,39 +18,46 @@ export const prompt: PromptBoiler = async () => {
   return prompts
 }
 
-export const generate: ActionBoiler = async () => {
+export const install: ActionBoiler = async () => {
   const actions: BoilerAction[] = []
 
-  // actions.push({
-  //   action: "write",
-  //   path: "src/someName.ts",
-  //   sourcePath: "tsignore/someName.ts",
-  // })
+  actions.push({
+    action: "generate",
+    source: ["git@github.com:boiler-dev/spawn-boiler.git"],
+  })
 
   return actions
 }
 
-// export const absorb: ActionBoiler = async ({ writes }) => {
-//   const actions = []
-
-//   return writes.map(({ path, sourcePath }) => ({
-//     action: "write",
-//     sourcePath: path,
-//     path: sourcePath,
-//     modify: (src: string): string => str
-//   }))
-
-//   return actions
-// }
-
 export const uninstall: ActionBoiler = async () => {
   const actions: BoilerAction[] = []
 
-  // actions.push({
-  //   action: "npmUninstall",
-  //   dev: true,
-  //   source: ["some-package"],
-  // })
+  actions.push({
+    action: "generate",
+    source: ["git@github.com:boiler-dev/spawn-boiler.git"],
+    uninstall: true,
+  })
 
   return actions
+}
+
+export const generate: ActionBoiler = async () => {
+  const actions: BoilerAction[] = []
+
+  actions.push({
+    action: "write",
+    path: "src/deploy.ts",
+    sourcePath: "tsignore/deploy.ts",
+  })
+
+  return actions
+}
+
+export const absorb: ActionBoiler = async ({ writes }) => {
+  return writes.map(({ path, sourcePath }) => ({
+    action: "write",
+    sourcePath: path,
+    path: sourcePath,
+    // modify: (src: string): string => src,
+  }))
 }
