@@ -56,6 +56,14 @@ export const uninstall: ActionBoiler = async () => {
     uninstall: true,
   })
 
+  actions.push({
+    action: "merge",
+    path: "package.json",
+    source: {
+      deploy: "./bin/deploy",
+    },
+  })
+
   return actions
 }
 
