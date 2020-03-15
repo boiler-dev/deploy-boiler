@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+require("source-map-support/register")
+require("../dist/src/deploy").default.run(process.argv.slice(2))

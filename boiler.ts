@@ -23,7 +23,16 @@ export const install: ActionBoiler = async () => {
 
   actions.push({
     action: "generate",
-    source: ["git@github.com:boiler-dev/spawn-boiler.git"],
+    source: [
+      "git@github.com:boiler-dev/ls-boiler.git",
+      "git@github.com:boiler-dev/spawn-boiler.git",
+    ],
+  })
+
+  actions.push({
+    action: "npmInstall",
+    dev: true,
+    source: ["source-map-support"],
   })
 
   return actions
@@ -34,7 +43,16 @@ export const uninstall: ActionBoiler = async () => {
 
   actions.push({
     action: "generate",
-    source: ["git@github.com:boiler-dev/spawn-boiler.git"],
+    source: [
+      "git@github.com:boiler-dev/ls-boiler.git",
+      "git@github.com:boiler-dev/spawn-boiler.git",
+    ],
+    uninstall: true,
+  })
+
+  actions.push({
+    action: "npmInstall",
+    source: ["source-map-support"],
     uninstall: true,
   })
 
@@ -48,6 +66,13 @@ export const generate: ActionBoiler = async () => {
     action: "write",
     path: "src/deploy.ts",
     sourcePath: "tsignore/deploy.ts",
+  })
+
+  actions.push({
+    action: "write",
+    path: "bin/deploy",
+    sourcePath: "deploy",
+    bin: true,
   })
 
   return actions
