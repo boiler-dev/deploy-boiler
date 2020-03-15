@@ -23,6 +23,8 @@ export class Deploy {
         if (baseMatch && serverless) {
           await spawn.run("npx", {
             args: ["serverless", "deploy", "-c", rel],
+            cwd: root,
+            env: process.env,
             stdout: true,
           })
         }
