@@ -9,7 +9,7 @@ export class Deploy {
     const { files } = await ls.run(join(root, "deploy"))
 
     if (!args.length) {
-      args = files.map(file => relative(root, file))
+      args = files.map((file) => relative(root, file))
     }
 
     for (const file of files) {
